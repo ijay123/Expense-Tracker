@@ -11,6 +11,11 @@ import { createExpenseAction } from "../../redux/action/expenses";
 import { useNavigate } from "react-router-dom";
 
 const Income = () => {
+
+  const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
+  ? JSON.parse(localStorage.getItem("expenseUserInfo"))
+  : null;
+
   const dispatch = useDispatch();
   const {
     expenses: { error, expens, success, loading },
@@ -19,6 +24,7 @@ const Income = () => {
   const [value, setValue] = useState({
     type: ["income", "expense"],
     amount: "",
+    userId:  userInfoFromLocalStorage._id
   });
 
   const navigate = useNavigate();
@@ -42,7 +48,7 @@ const Income = () => {
 
   async function incomeHandler() {
     dispatch(
-      createExpenseAction({ type: value.type[0], amount: Number(value.amount) })
+      createExpenseAction({ type: value.type[0], amount: Number(value.amount), userId: value.userId })
     );
   }
 

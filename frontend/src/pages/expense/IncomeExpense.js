@@ -34,7 +34,7 @@ const IncomeExpense = () => {
     desc: "",
     price: "",
     amount: "",
-    user: userInfoFromLocalStorage?.data?._id,
+    userId: userInfoFromLocalStorage?.data?._id,
   });
 
   const handleChange = (event) => {
@@ -58,7 +58,7 @@ const IncomeExpense = () => {
     }
 
     dispatch(getCategoriesAction());
-    dispatch(getExpenseAction());
+    // dispatch(getExpenseAction({amount: expens.amount}));
   }, [success, error, dispatch, expens]);
 
   console.log(cat);
@@ -68,7 +68,8 @@ const IncomeExpense = () => {
       createExpenseAction({
         type: value.type[0],
         desc: value.desc,
-        amount: value.desc
+        amount: value.amount,
+        userId: value.userId
       })
     );
   }
@@ -84,7 +85,7 @@ const IncomeExpense = () => {
               <input
                 placeholder="Add income"
                 name="amount"
-                value={value.amount}
+            
                 onChange={handleChange}
                 className="bg-white w-[300px] h-[90px] mb-[80px] pl-[20px] outline-none rounded-[10px] text-[30px]"
               />

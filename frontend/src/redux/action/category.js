@@ -21,9 +21,9 @@ export const createCategoryAction =
   (formData) =>
   async (dispatch, state) => {
 
-    const {
-      loggedInUser: { user},
-    } = state();
+    // const {
+    //   loggedInUser: { user},
+    // } = state();
     //1. before the API call
     dispatch({
       type: CREATE_CATEGORY_REQUEST,

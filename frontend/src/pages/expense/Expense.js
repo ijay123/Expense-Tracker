@@ -6,6 +6,9 @@ import Category from "./Category";
 import { useNavigate } from "react-router-dom";
 
 const Expense = () => {
+
+ 
+
   const [value, setValue] = useState({
     type: ["income", "expense"],
     user: "",

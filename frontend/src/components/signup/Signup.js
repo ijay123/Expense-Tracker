@@ -118,9 +118,16 @@ const Signup = ({ register, login }) => {
         </div>
         <div className="flex w-full flex-col md:w-1/2">
           <div className=" mx-auto flex flex-col justify-center px-6 pt-8 md:justify-start lg:w-[28rem]">
-            <p className="text-center text-3xl font-bold md:text-left md:leading-tight">
-              Create your free account
-            </p>
+            {register && (
+              <p className="text-center text-3xl font-bold md:text-left md:leading-tight">
+                Create your free account
+              </p>
+            )}
+            {login && (
+              <p className="text-center text-3xl font-bold md:text-left md:leading-tight">
+                Login into your account
+              </p>
+            )}
 
             <div className="flex flex-col items-stretch pt-3 md:pt-8">
               <div className="flex flex-col pt-4">
