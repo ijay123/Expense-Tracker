@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import Income from "./Income";
 import Category from "./Category";
 
-
-
 const Expense = () => {
-
- 
-
   // const [value, setValue] = useState({
   //   type: ["income", "expense"],
   //   user: "",
   // });
 
-
-
   // const [incomeExpense, setIncomeExpense] = useState("SelectType");
 
   // const [income, setIncome] = useState(false);
-  const [expense, setExpense] = useState(false);
+  // const [expense, setExpense] = useState(false);
 
   // const handleChange = (event) => {
   //   setIncomeExpense(event.target.value);
@@ -38,7 +31,6 @@ const Expense = () => {
 
   // }, [incomeExpense]);
 
- 
   return (
     <>
       <div className="pt-[70px] text-[40px] mb-[50px] items-center justify-center flex text-green-800">
@@ -46,14 +38,13 @@ const Expense = () => {
       </div>
 
       <div className="flex justify-center gap-[150px]">
-   {/* category */}
+        {/* category */}
 
-       <Category/>
+        <Category />
+      </div>
 
-</div>
-
-{/* income */}
-        {/* <div className="border w-[280px] pl-[10px] pb-[20px] rounded-[10px]">
+      {/* income */}
+      {/* <div className="border w-[280px] pl-[10px] pb-[20px] rounded-[10px]">
         <p className="text-[20px] pb-[30px] pt-[20px] text-green-600">TYPE</p>
 
         <select

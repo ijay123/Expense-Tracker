@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   CREATE_EXPENSE_CLEAR_ERROR,
@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/CustomSpinner";
 import { createExpenseAction } from "../../redux/action/expenses";
-import { useNavigate } from "react-router-dom";
+
 import { getCategoriesAction } from "../../redux/action/category";
 
 const IncomeExpense = () => {
@@ -21,12 +21,7 @@ const IncomeExpense = () => {
   const dispatch = useDispatch();
   const {
     expenses: { error, expens, success, loading },
-    AllCategories: {
-      error: catError,
-      name: cat,
-      success: catSuccess,
-      loading: catLoading,
-    },
+    AllCategories: { name: cat },
   } = useSelector((state) => state);
 
   const [value, setValue] = useState({
@@ -43,7 +38,7 @@ const IncomeExpense = () => {
     console.log(event.target?.value);
   };
 
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (success) {

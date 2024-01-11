@@ -125,7 +125,7 @@ export const getExpenseAction = () => async (dispatch, state) => {
       type: GET_EXPENSE_REQUEST,
     });
     // make the call
-    const { data } = await axios.get(`${baseUrl}/expenses`, config);
+    const { data } = await axios.get(`${baseUrl}/expenses?id=${userInfoFromLocalStorage.data?._id}`, config);
     console.log(data, "data");
     //if we get here, then request is a success case
     dispatch({
