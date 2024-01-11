@@ -5,6 +5,7 @@ export const createIncomeExpenseSchema = Joi.object({
   type: Joi.string().valid("income", "expense").required(),
   desc: Joi.string(),
   totalExpense: Joi.number(),
+  price: Joi.number(),
   userId: Joi.string(),
   
 });

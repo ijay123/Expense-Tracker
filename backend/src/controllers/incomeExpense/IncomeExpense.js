@@ -24,7 +24,8 @@ export const createIncomeExpense = async (req, res) => {
     amount: data.amount,
     desc: data.desc,
     type: data.type,
-    totalExpense: data.type,
+    totalExpense: data.totalExpense,
+    price: data.price,
     userId: req.user._id,
   });
 
@@ -90,7 +91,7 @@ export const getAllIncomeExpenses = async (req, res) => {
 
 export const updateIncomeExpense = async (req, res) => {
   const { incomeExpenseId } = req.params;
-  const { amount, type, desc, totalExpense } = req.body;
+  const { amount, type, desc, totalExpense, price } = req.body;
   const exist = await IncomeExpense.findOne({ _id: incomeExpenseId });
   if (!exist) {
     res.status(httpStatus.BAD_REQUEST).json({
@@ -107,6 +108,7 @@ export const updateIncomeExpense = async (req, res) => {
       type: type,
       desc: desc,
       totalExpense: totalExpense,
+      price: price
     },
     { new: true }
   );

@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Income from "./Income";
+// import Income from "./Income";
 import Category from "./Category";
 
 
-import { useNavigate } from "react-router-dom";
 
 const Expense = () => {
 
  
 
-  const [value, setValue] = useState({
-    type: ["income", "expense"],
-    user: "",
-  });
+  // const [value, setValue] = useState({
+  //   type: ["income", "expense"],
+  //   user: "",
+  // });
 
 
 
-  const [incomeExpense, setIncomeExpense] = useState("SelectType");
+  // const [incomeExpense, setIncomeExpense] = useState("SelectType");
 
-  const [income, setIncome] = useState(false);
+  // const [income, setIncome] = useState(false);
   const [expense, setExpense] = useState(false);
 
-  const handleChange = (event) => {
-    setIncomeExpense(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setIncomeExpense(event.target.value);
+  // };
 
   // const renderResult = () => {
   //   let result;
@@ -33,30 +32,28 @@ const Expense = () => {
   //   return result;
   // };
 
-  useEffect(() => {
-    incomeExpense === "income" ? setIncome(true) : setIncome(false);
-    incomeExpense === "expense" ? setExpense(true) : setExpense(false);
+  // useEffect(() => {
+  //   incomeExpense === "income" ? setIncome(true) : setIncome(false);
+  //   incomeExpense === "expense" ? setExpense(true) : setExpense(false);
 
-  }, [incomeExpense]);
+  // }, [incomeExpense]);
 
-  const navigate = useNavigate();
+ 
   return (
     <>
       <div className="pt-[70px] text-[40px] mb-[50px] items-center justify-center flex text-green-800">
         Expense Tracker
       </div>
 
-   
-
       <div className="flex justify-center gap-[150px]">
    {/* category */}
 
        <Category/>
 
-
+</div>
 
 {/* income */}
-        <div className="border w-[280px] pl-[10px] pb-[20px] rounded-[10px]">
+        {/* <div className="border w-[280px] pl-[10px] pb-[20px] rounded-[10px]">
         <p className="text-[20px] pb-[30px] pt-[20px] text-green-600">TYPE</p>
 
         <select
@@ -69,17 +66,17 @@ const Expense = () => {
           <option value={value.type[1]}>Expense</option>
         </select>
 
-        {/* <button
+        <button
           className="border px-[30px] py-[10px] ml-[30px] rounded-[10px] bg-[green] text-white"
           onClick={()=>renderResult}
         >
           Enter
-        </button> */}
+        </button>
       </div>
-      </div>
+      </div> */}
 
-      <div className="">{income && <Income />}</div>
-      <div>{expense && navigate("/incomeexpense")}</div>
+      {/* <div className="">{income && <Income />}</div> */}
+      {/* <div>{expense && navigate("/incomeexpense")}</div> */}
     </>
   );
 };

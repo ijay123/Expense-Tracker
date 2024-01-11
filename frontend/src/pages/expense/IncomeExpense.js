@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { CREATE_EXPENSE_CLEAR_ERROR, CREATE_EXPENSE_RESET } from "../../redux/constants/expenses";
+import {
+  CREATE_EXPENSE_CLEAR_ERROR,
+  CREATE_EXPENSE_RESET,
+} from "../../redux/constants/expenses";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/CustomSpinner";
-import {
-  createExpenseAction,
-  getExpenseAction,
-} from "../../redux/action/expenses";
+import { createExpenseAction } from "../../redux/action/expenses";
 import { useNavigate } from "react-router-dom";
 import { getCategoriesAction } from "../../redux/action/category";
 
@@ -34,6 +34,7 @@ const IncomeExpense = () => {
     desc: "",
     price: "",
     amount: "",
+    totalExpense: "",
     userId: userInfoFromLocalStorage?.data?._id,
   });
 
@@ -58,7 +59,6 @@ const IncomeExpense = () => {
     }
 
     dispatch(getCategoriesAction());
-    // dispatch(getExpenseAction({amount: expens.amount}));
   }, [success, error, dispatch, expens]);
 
   console.log(cat);
@@ -68,8 +68,10 @@ const IncomeExpense = () => {
       createExpenseAction({
         type: value.type[0],
         desc: value.desc,
-        amount: value.amount,
-        userId: value.userId
+        price: Number(value.price),
+        amount: Number(value.amount),
+        totalExpense: Number(value.amount - value.price),
+        userId: value.userId,
       })
     );
   }
@@ -85,7 +87,6 @@ const IncomeExpense = () => {
               <input
                 placeholder="Add income"
                 name="amount"
-            
                 onChange={handleChange}
                 className="bg-white w-[300px] h-[90px] mb-[80px] pl-[20px] outline-none rounded-[10px] text-[30px]"
               />
@@ -116,6 +117,7 @@ const IncomeExpense = () => {
                 rows={7}
                 cols={25}
                 type="text"
+                name="desc"
                 placeholder="Type an item"
                 onChange={handleChange}
                 className="outline-none p-[10px]"
@@ -124,9 +126,19 @@ const IncomeExpense = () => {
                 type="number"
                 placeholder="Add Price"
                 onChange={handleChange}
+                name="price"
                 className="p-[10px] outline-none"
               />
             </div>
+
+            <input
+              type="number"
+              name="totalPrice"
+              placeholder="total Price"
+              value={value.totalExpense}
+              onChange={handleChange}
+              className="p-[10px] outline-none"
+            />
 
             {loading ? (
               <Spinner />

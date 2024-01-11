@@ -24,7 +24,7 @@ const Income = () => {
   const [value, setValue] = useState({
     type: ["income", "expense"],
     amount: "",
-    userId:  userInfoFromLocalStorage._id
+    userId:  userInfoFromLocalStorage?.data?._id
   });
 
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const Income = () => {
         dispatch(CREATE_EXPENSE_CLEAR_ERROR);
       }, 3000);
     }
+    
   }, [success, error, dispatch, expens, navigate]);
 
   async function incomeHandler() {

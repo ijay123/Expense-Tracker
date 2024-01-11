@@ -8,6 +8,8 @@ import {
 } from "../../redux/constants/category";
 import { createCategoryAction } from "../../redux/action/category";
 
+import { useNavigate } from "react-router-dom";
+
 const Category = () => {
   const dispatch = useDispatch();
   const {
@@ -27,10 +29,12 @@ const Category = () => {
     setValue({ ...value, name: event.target?.value });
     console.log(event.target?.value);
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (success) {
-      toast.success(`successfully added category`);
+      toast.success(`successfully added category ${name.name}`);
+      navigate('/incomeexpense') 
       dispatch({ type: CREATE_CATEGORY_RESET });
     }
 
@@ -40,13 +44,12 @@ const Category = () => {
         dispatch(CREATE_CATEGORY_CLEAR_ERROR);
       }, 3000);
     }
-  }, [success, error, dispatch]);
+  }, [success, error, dispatch, name, navigate]);
 
   async function categoryHandler() {
     dispatch(createCategoryAction(value));
+   
   }
-
-  
 
   console.log(value);
 

@@ -5,6 +5,7 @@ const incomeExpenseSchema = new mongoose.Schema(
     type: { type: String, enum: ["income", "expense"] },
     desc: { type: String },
     totalExpense: {type: Number},
+    price: {type: Number},
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
