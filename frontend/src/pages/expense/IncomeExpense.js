@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   CREATE_EXPENSE_CLEAR_ERROR,
@@ -17,7 +17,7 @@ const IncomeExpense = () => {
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
     : null;
-
+const navigate = useNavigate()
   const dispatch = useDispatch();
   const {
     expenses: { error, expens, success, loading },
@@ -68,7 +68,9 @@ const IncomeExpense = () => {
         totalExpense: Number(value.amount - value.price),
         userId: value.userId,
       })
+     
     );
+    navigate('/listedexpense')
   }
   return (
     <div className="pt-[150px] bg-green-700 h-[100vh]">
@@ -96,13 +98,7 @@ const IncomeExpense = () => {
                   : ""}
               </select>
 
-              {/* <input
-                placeholder="Add Category"
-                name="category"
-                value={value.category}
-                onChange={handleChange}
-                className="bg-white  w-[300px] h-[90px] pl-[20px] outline-none rounded-[10px] text-[30px]"
-              /> */}
+            
             </div>
           </div>
           <div>

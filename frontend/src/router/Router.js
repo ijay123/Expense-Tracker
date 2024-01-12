@@ -7,6 +7,7 @@ import { ProtectedRoute } from "../pages/defaultLayout/protectedRoute/ProtectedR
 import Expense from "../pages/expense/Expense";
 import NotFound from "../pages/defaultLayout/not_found/NotFound";
 import IncomeExpense from "../pages/expense/IncomeExpense";
+import ListedExpenses from "../pages/expense/ListedExpenses";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/incomeexpense"
         element={
@@ -30,8 +32,15 @@ const Router = () => {
           </Layout>
         }
       />
-       
-     
+
+      <Route
+        path="/listedexpense"
+        element={
+          <Layout>
+            <ListedExpenses />
+          </Layout>
+        }
+      />
 
       <Route
         path="/notFound"
