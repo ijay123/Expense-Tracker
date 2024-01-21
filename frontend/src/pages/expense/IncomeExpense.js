@@ -70,7 +70,7 @@ const navigate = useNavigate()
       })
      
     );
-    navigate('/listedexpense')
+    // navigate('/listedexpense')
   }
   return (
     <div className="pt-[150px] bg-green-700 h-[100vh]">
