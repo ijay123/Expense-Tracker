@@ -17,7 +17,7 @@ const IncomeExpense = () => {
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
     : null;
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     expenses: { error, expens, success, loading },
@@ -30,15 +30,18 @@ const navigate = useNavigate()
     price: "",
     amount: "",
     totalExpense: "",
+    selectedCategory: "",
     userId: userInfoFromLocalStorage?.data?._id,
   });
 
   const handleChange = (event) => {
-    setValue({ ...value, name: event.target?.value });
-    console.log(event.target?.value);
-  };
+    const { name, value } = event.target;
 
-  
+    setValue((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     if (success) {
@@ -66,9 +69,9 @@ const navigate = useNavigate()
         price: Number(value.price),
         amount: Number(value.amount),
         totalExpense: Number(value.amount - value.price),
+        selectedCategory: value.selectedCategory,
         userId: value.userId,
       })
-     
     );
     // navigate('/listedexpense')
   }
@@ -93,17 +96,15 @@ const navigate = useNavigate()
               <select>
                 {cat
                   ? cat.map((category, id) => (
-                      <option key={id}>{category.name}</option>
+                      <option key={id} value={category.name}>{category.name}</option>
                     ))
                   : ""}
               </select>
-
-            
             </div>
           </div>
           <div>
             {/* last */}
-            
+
             <div className="flex gap-[30px] items-center">
               <textarea
                 rows={7}

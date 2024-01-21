@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {GiCrossMark} from 'react-icons/gi'
 
 import { toast } from "react-toastify";
 import { createUserAction } from "../../redux/action/user.js";
@@ -92,9 +93,11 @@ const Signup = ({ register, login }) => {
   return (
     <div>
       <div className="flex w-screen flex-wrap text-slate-800">
-        <div className="relative hidden h-screen select-none flex-col justify-center bg-blue-600 text-center md:flex md:w-1/2">
-          <div className="mx-auto py-16 px-8 text-white xl:w-[40rem]">
-            <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600">
+        <div className="relative hidden h-screen select-none flex-col justify-center bg-black text-center md:flex md:w-1/2">
+          <div className="mx-auto py-16 text-white xl:w-[40rem]">
+
+            <img src="/img/expense-img.webp" alt="login-img" className="bg-[cover] h-[80vh] w-[100vw]"/>
+            {/* <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600">
               New Feature
             </span>
             <p className="my-6 text-3xl font-semibold leading-10">
@@ -112,11 +115,15 @@ const Signup = ({ register, login }) => {
               className="font-semibold tracking-wide text-white underline underline-offset-4"
             >
               Learn More
-            </a>
+            </a> */}
           </div>
           {/* <!-- <img className="mx-auto w-11/12 max-w-lg rounded-lg object-cover" src="/images/SoOmmtD2P6rjV76JvJTc6.png" /> --> */}
         </div>
-        <div className="flex w-full flex-col md:w-1/2">
+        <div className="flex mt-[100px] w-full flex-col md:w-1/2">
+        <div className="flex absolute top-[40px] right-[80px] items-center">
+        <GiCrossMark className="text-[red] text-[40px]" />
+        <span className="font-[cursive] pt-[20px] text-[20px]">Tracker</span>
+      </div>
           <div className=" mx-auto flex flex-col justify-center px-6 pt-8 md:justify-start lg:w-[28rem]">
             {register && (
               <p className="text-center text-3xl font-bold md:text-left md:leading-tight">
@@ -170,7 +177,7 @@ const Signup = ({ register, login }) => {
               </div>
               <div className="block">
                 <input
-                  className="mr-2 h-5 w-5 appearance-none rounded border border-gray-300 bg-contain bg-no-repeat align-top text-black shadow checked:bg-blue-600 focus:border-blue-600 focus:shadow"
+                  className="mr-2 h-5 w-5 appearance-none rounded border border-gray-300 bg-contain bg-no-repeat align-top text-black shadow checked:bg-[green] focus:border-blue-600 focus:shadow"
                   type="checkbox"
                   id="remember"
                   name="remember"
@@ -193,7 +200,7 @@ const Signup = ({ register, login }) => {
                     <button
                       onClick={LoginHandler}
                       type="submit"
-                      className="mt-6 rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2 md:w-32"
+                      className="mt-6 rounded-lg bg-[green] px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-[#1c561ce9] focus:ring-2 md:w-32"
                     >
                       Sign in
                     </button>
@@ -207,7 +214,7 @@ const Signup = ({ register, login }) => {
                     <button
                       onClick={RegisterHandler}
                       type="submit"
-                      className="mt-6 rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2 md:w-32"
+                      className="mt-6 rounded-lg bg-[green] px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-[#1c561ce9] focus:ring-2 md:w-32"
                     >
                       Register
                     </button>
