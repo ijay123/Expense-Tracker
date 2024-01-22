@@ -1,10 +1,15 @@
 import { combineReducers } from "redux";
 import { registerUserReducer } from "./reducers/user";
 import { loginUserReducer } from "./reducers/user";
-import { registerExpenseReducer, getExpensesReducer } from "./reducers/expenses";
+import {
+  registerExpenseReducer,
+  getExpensesReducer,
+} from "./reducers/expenses";
 import {
   getCategoryReducer,
   registerCategoryReducer,
+  updateCategoryReducer,
+  deleteCategoryReducer,
 } from "./reducers/category";
 
 export const combined = combineReducers({
@@ -14,4 +19,6 @@ export const combined = combineReducers({
   allExpenses: getExpensesReducer,
   categories: registerCategoryReducer,
   AllCategories: getCategoryReducer,
+  updatedCategory: updateCategoryReducer,
+  deletedCategory: deleteCategoryReducer,
 });

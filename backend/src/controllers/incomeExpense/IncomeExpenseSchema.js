@@ -7,4 +7,5 @@ export const createIncomeExpenseSchema = Joi.object({
   totalExpense: Joi.number(),
   price: Joi.number(),
   userId: Joi.string(),
+  categoryId: Joi.string(),
 });

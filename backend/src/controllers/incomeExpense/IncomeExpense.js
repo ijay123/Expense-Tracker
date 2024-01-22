@@ -10,7 +10,7 @@ export const createIncomeExpense = async (req, res) => {
   const descExist = await IncomeExpense.findOne({
     desc: data.desc,
     userId: req.user._id,
-  }).populate("user");
+  })
 
   if (descExist) {
     res.status(httpStatus.BAD_REQUEST).json({
@@ -26,6 +26,7 @@ export const createIncomeExpense = async (req, res) => {
     type: data.type,
     totalExpense: data.totalExpense,
     price: data.price,
+    categoryId: data.categoryId,
     userId: req.user._id,
   });
 
@@ -38,7 +39,7 @@ export const createIncomeExpense = async (req, res) => {
 export const getIncomeExpense = async (req, res) => {
   const incomeExpense = await IncomeExpense.findById(
     req.params.incomeExpenseId
-  ).populate("user");
+  ).populate("userId");
   if (!incomeExpense) {
     res.status(httpStatus.BAD_REQUEST).json({
       status: "error",
@@ -54,7 +55,6 @@ export const getIncomeExpense = async (req, res) => {
 };
 
 export const getAllIncomeExpenses = async (req, res) => {
-
   try {
     const model = "IncomeExpense";
     const query = { userId: req.user.id };
@@ -77,7 +77,6 @@ export const getAllIncomeExpenses = async (req, res) => {
       payload: error.message,
     });
   }
-
 
   // const result = await IncomeExpense.find({ userId: req.user._id }).populate(
   //   "userId"
@@ -108,7 +107,7 @@ export const updateIncomeExpense = async (req, res) => {
       type: type,
       desc: desc,
       totalExpense: totalExpense,
-      price: price
+      price: price,
     },
     { new: true }
   );

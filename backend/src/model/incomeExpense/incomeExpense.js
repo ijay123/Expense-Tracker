@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 const incomeExpenseSchema = new mongoose.Schema(
   {
@@ -7,6 +6,7 @@ const incomeExpenseSchema = new mongoose.Schema(
     desc: { type: String },
     totalExpense: { type: Number },
     price: { type: Number },
+    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
@@ -15,6 +15,3 @@ const incomeExpenseSchema = new mongoose.Schema(
 const IncomeExpense = mongoose.model("IncomeExpense", incomeExpenseSchema);
 
 export default IncomeExpense;
-
-
-

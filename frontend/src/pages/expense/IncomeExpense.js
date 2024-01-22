@@ -30,7 +30,12 @@ const IncomeExpense = () => {
     price: "",
     amount: "",
     totalExpense: "",
-    selectedCategory: "",
+
+    userId: userInfoFromLocalStorage?.data?._id,
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState({
+    categoryId: "",
     userId: userInfoFromLocalStorage?.data?._id,
   });
 
@@ -43,10 +48,17 @@ const IncomeExpense = () => {
     }));
   };
 
+  const handleCat = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
   useEffect(() => {
     if (success) {
       toast.success(`successfully added${expens.type[1]}`);
       dispatch({ type: CREATE_EXPENSE_RESET });
+      setTimeout(() => {
+        navigate("/listedexpense");
+      }, 3000);
     }
 
     if (error) {
@@ -57,7 +69,7 @@ const IncomeExpense = () => {
     }
 
     dispatch(getCategoriesAction());
-  }, [success, error, dispatch, expens]);
+  }, [success, error, dispatch, expens, navigate]);
 
   console.log(cat);
 
@@ -69,9 +81,9 @@ const IncomeExpense = () => {
         price: Number(value.price),
         amount: Number(value.amount),
         totalExpense: Number(value.amount - value.price),
-        selectedCategory: value.selectedCategory,
+       
         userId: value.userId,
-      })
+      }, selectedCategory)
     );
     // navigate('/listedexpense')
   }
@@ -93,15 +105,29 @@ const IncomeExpense = () => {
             </div>
 
             <div>
-              <select>
+              <select onChange={handleCat} value={selectedCategory.categoryId}>
+                <option>Select Category</option>
                 {cat
-                  ? cat.map((category, id) => (
-                      <option key={id} value={category.name}>{category.name}</option>
+                  ? cat.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
                     ))
                   : ""}
               </select>
+
+              <div>
+                <input
+                  type="text"
+                  onChange={handleCat}
+                  value={selectedCategory.categoryId}
+                  placeholder="category"
+                  className="mt-[20px] p-[5px]"
+                />
+              </div>
             </div>
           </div>
+
           <div>
             {/* last */}
 

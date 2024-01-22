@@ -1,24 +1,19 @@
-import React, {useState, useEffect} from 'react'
-import { getCategoryAction } from '../../redux/action/category';
-import { getExpensesAction } from '../../redux/action/expenses';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+
+import { getExpensesAction } from "../../redux/action/expenses";
+import { useDispatch, useSelector } from "react-redux";
 
 const ListedExpenses = () => {
-
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
     : null;
 
   const dispatch = useDispatch();
   const {
-    expenses: { error, expens, success, loading },
-    AllCategories: {
-      error: catError,
-      name: cat,
-      success: catSuccess,
-      loading: catLoading,
-    },
+    allExpenses: { expenses },
   } = useSelector((state) => state);
+
+console.log(expenses, 'expenses')
 
   useEffect(() => {
     // if (success) {
@@ -32,31 +27,27 @@ const ListedExpenses = () => {
     //     dispatch(CREATE_EXPENSE_CLEAR_ERROR);
     //   }, 3000);
     // }
-
-    dispatch(getCategoryAction());
     dispatch(getExpensesAction());
   }, [dispatch]);
 
   return (
     <div>
-
-{cat.map((category, id)=>(
-  <div key={id}>
-    <p>{category.name}</p>
-  </div>
-))}
-
-      {expens.map((expense, id)=>(
-        <div key={id}>
-          <p>{expense.amount}</p>
-          <p>{expense.type}</p>
-          <p>{expense.desc}</p>
-          <p>{expense.price}</p>
-          <p>{expense.total}</p>
-        </div>
-      ))}
+      <div>
+        {expenses
+          ? expenses.map((expense, id) => (
+              <div key={id}>
+                <p>{expense.amount}</p>
+                <p>{expense.type}</p>
+                <p>{expense.desc}</p>
+                <p>{expense.price}</p>
+                <p>{expense.totalExpense}</p>
+               
+              </div>
+            ))
+          : ""}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListedExpenses
+export default ListedExpenses;

@@ -18,7 +18,7 @@ const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
 const baseUrl = "http://localhost:5000";
 
 export const createExpenseAction =
-  ({ amount, desc, type, totalExpense, price, userId }) =>
+  ({ amount, desc, type, totalExpense, categoryId, price, userId }) =>
   async (dispatch, state) => {
     //1. before the API call
     dispatch({
@@ -36,7 +36,7 @@ export const createExpenseAction =
       //make API call
       const { data } = await axios.post(
         `${baseUrl}/expenses`,
-        { amount, desc, type, totalExpense, price, userId },
+        { amount, desc, type, totalExpense, price, categoryId, userId },
         config
       );
       //2. after the API call success
@@ -125,7 +125,10 @@ export const getExpenseAction = () => async (dispatch, state) => {
       type: GET_EXPENSE_REQUEST,
     });
     // make the call
-    const { data } = await axios.get(`${baseUrl}/expenses?id=${userInfoFromLocalStorage.data?._id}`, config);
+    const { data } = await axios.get(
+      `${baseUrl}/expenses?id=${userInfoFromLocalStorage.data?._id}`,
+      config
+    );
     console.log(data, "data");
     //if we get here, then request is a success case
     dispatch({
