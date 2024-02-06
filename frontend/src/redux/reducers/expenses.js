@@ -4,11 +4,11 @@ import {
   CREATE_EXPENSE_RESET,
   CREATE_EXPENSE_CLEAR_ERROR,
   CREATE_EXPENSE_ERROR,
-  GET_EXPENSE_REQUEST,
-  GET_EXPENSE_CLEAR_ERROR,
-  GET_EXPENSE_ERROR,
-  GET_EXPENSE_SUCCESS,
-  GET_EXPENSE_RESET,
+  GET_EXPENSES_REQUEST,
+  GET_EXPENSES_CLEAR_ERROR,
+  GET_EXPENSES_ERROR,
+  GET_EXPENSES_SUCCESS,
+  GET_EXPENSES_RESET,
 } from "../constants/expenses";
 
 export const registerExpenseReducer = (
@@ -62,13 +62,13 @@ export const getExpensesReducer = (
   action
 ) => {
   switch (action.type) {
-    case GET_EXPENSE_REQUEST:
+    case GET_EXPENSES_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case GET_EXPENSE_SUCCESS:
+    case GET_EXPENSES_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -76,7 +76,7 @@ export const getExpensesReducer = (
         expenses: action.payload,
       };
 
-    case GET_EXPENSE_RESET:
+    case GET_EXPENSES_RESET:
       return {
         loading: false,
         success: false,
@@ -84,14 +84,14 @@ export const getExpensesReducer = (
         error: null,
       };
 
-    case GET_EXPENSE_CLEAR_ERROR:
+    case GET_EXPENSES_CLEAR_ERROR:
       return {
         ...state,
         error: null,
         loading: false,
       };
 
-    case GET_EXPENSE_ERROR:
+    case GET_EXPENSES_ERROR:
       return {
         ...state,
         loading: false,
@@ -99,6 +99,8 @@ export const getExpensesReducer = (
       };
 
     default:
-      return state;
+      return {
+        ...state,
+      };
   }
 };

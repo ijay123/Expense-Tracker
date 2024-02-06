@@ -30,12 +30,8 @@ const IncomeExpense = () => {
     price: "",
     amount: "",
     totalExpense: "",
-
-    userId: userInfoFromLocalStorage?.data?._id,
-  });
-
-  const [selectedCategory, setSelectedCategory] = useState({
     categoryId: "",
+
     userId: userInfoFromLocalStorage?.data?._id,
   });
 
@@ -46,10 +42,6 @@ const IncomeExpense = () => {
       ...prevValue,
       [name]: value,
     }));
-  };
-
-  const handleCat = (event) => {
-    setSelectedCategory(event.target.value);
   };
 
   useEffect(() => {
@@ -80,10 +72,10 @@ const IncomeExpense = () => {
         desc: value.desc,
         price: Number(value.price),
         amount: Number(value.amount),
+        categoryId: value.categoryId,
         totalExpense: Number(value.amount - value.price),
-       
         userId: value.userId,
-      }, selectedCategory)
+      })
     );
     // navigate('/listedexpense')
   }
@@ -93,51 +85,45 @@ const IncomeExpense = () => {
         <h2 className="text-center text-4xl font-bold mb-[100px] text-white">
           Add Expense
         </h2>
-        <div className="flex gap-[300px]">
+        <div className="flex gap-[200px]">
           <div className="flex-col ml-[200px]">
             <div>
               <input
                 placeholder="Add income"
                 name="amount"
                 onChange={handleChange}
-                className="bg-white w-[300px] h-[90px] mb-[80px] pl-[20px] outline-none rounded-[10px] text-[30px]"
+                className="bg-white w-[300px] h-[50px] mb-[80px] pl-[20px] outline-none rounded-[10px] text-[30px]"
               />
             </div>
 
             <div>
-              <select onChange={handleCat} value={selectedCategory.categoryId}>
+              <select
+                onChange={handleChange}
+                value={value.categoryId}
+                name="categoryId"
+                className="w-[200px] h-[50px] rounded-[10px] outline-none"
+              >
                 <option>Select Category</option>
-                {cat
-                  ? cat.map((category) => (
-                      <option key={category._id} value={category._id}>
-                        {category.name}
-                      </option>
-                    ))
-                  : ""}
+                {cat &&
+                  cat.map((cat) => (
+                    <option key={cat._id} value={cat._id}>
+                      {cat.name}
+                    </option>
+                  ))}
               </select>
-
-              <div>
-                <input
-                  type="text"
-                  onChange={handleCat}
-                  value={selectedCategory.categoryId}
-                  placeholder="category"
-                  className="mt-[20px] p-[5px]"
-                />
-              </div>
             </div>
           </div>
 
           <div>
             {/* last */}
 
-            <div className="flex gap-[30px] items-center">
+            <div className="flex gap-[30px] items-center border-[5px] border-[#6d2a2a] bg-[#566156] p-[40px]">
               <textarea
-                rows={7}
-                cols={25}
+                rows={5}
+                cols={20}
                 type="text"
                 name="desc"
-                placeholder="Type an item"
+                placeholder="Add an item"
                 onChange={handleChange}
                 className="outline-none p-[10px]"
               />
@@ -156,17 +142,17 @@ const IncomeExpense = () => {
               placeholder="total Price"
               value={value.totalExpense}
               onChange={handleChange}
-              className="p-[10px] outline-none"
+              className="p-[10px] outline-none mt-[30px]"
             />
-
+<br/>
             {loading ? (
               <Spinner />
             ) : (
               <button
                 onClick={expenseHandler}
-                className="w-[200px] h-[40px] bg-[orange] rounded-[5px] text-white mt-[100px] ml-[100px] outline-none"
+                className="w-[200px] h-[40px] bg-[grey] rounded-[5px] text-white mt-[100px] ml-[100px] outline-none"
               >
-                Add to Expenses
+                Add to Income
               </button>
             )}
           </div>

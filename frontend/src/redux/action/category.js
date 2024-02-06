@@ -21,7 +21,7 @@ const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
   ? JSON.parse(localStorage.getItem("expenseUserInfo"))
   : null;
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://expense-tracker-backend-2ge0.onrender.com";
 
 export const createCategoryAction = (formData) => async (dispatch, state) => {
   // const {

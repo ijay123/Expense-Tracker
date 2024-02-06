@@ -1,50 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { getExpensesAction } from "../../redux/action/expenses";
 import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../components/Spinner/CustomSpinner";
+
+
 
 const ListedExpenses = () => {
-  const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
-    ? JSON.parse(localStorage.getItem("expenseUserInfo"))
-    : null;
+  // const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
+  //   ? JSON.parse(localStorage.getItem("expenseUserInfo"))
+  //   : null;
 
   const dispatch = useDispatch();
   const {
-    allExpenses: { expenses },
+    allExpenses: { expenses, loading },
+  
   } = useSelector((state) => state);
 
-console.log(expenses, 'expenses')
+  // const { records } = expenses;
+
+  console.log(expenses, "expenses");
 
   useEffect(() => {
-    // if (success) {
-    //   toast.success(`successfully added${expens.type[1]}`);
-    //   dispatch({ type: CREATE_EXPENSE_RESET });
-    // }
-
-    // if (error) {
-    //   toast.error(`${error}`);
-    //   setTimeout(() => {
-    //     dispatch(CREATE_EXPENSE_CLEAR_ERROR);
-    //   }, 3000);
-    // }
     dispatch(getExpensesAction());
+ 
   }, [dispatch]);
 
   return (
-    <div>
-      <div>
-        {expenses
-          ? expenses.map((expense, id) => (
-              <div key={id}>
-                <p>{expense.amount}</p>
-                <p>{expense.type}</p>
-                <p>{expense.desc}</p>
-                <p>{expense.price}</p>
-                <p>{expense.totalExpense}</p>
-               
-              </div>
-            ))
-          : ""}
+    <div className="pt-[200px]">
+      <p className="flex justify-center text-[40px] mb-[40px] text-[green]">All Expenses</p>
+      <div className="text-[25px] text-[green] border w-[80%] m-auto">
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="p-[20px]">
+            {expenses &&
+               expenses.map((expense) => (
+                  <div key={expense._id} className="flex p-[40px] gap-[20px] bg-[#b8b5b5]">
+                     <p><span className="text-[#6c2b2b]">Category:</span> {expense.categoriId}</p>
+                    <p><span className="text-[#6c2b2b]">Income:</span> {expense.amount}</p>
+                    <p><span className="text-[#6c2b2b]">Description:</span>{expense.desc}</p>
+                    <p><span className="text-[#6c2b2b]">Price:</span> {expense.price}</p>
+                    <p><span className="text-[#6c2b2b]">Total Income:</span> {expense.totalExpense}</p>
+                    
+                  </div>
+                ))
+              }
+          </div>
+        )}
       </div>
     </div>
   );

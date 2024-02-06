@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://expense-tracker-backend-2ge0.onrender.com";
 
 export const createUserAction =
   ({ email, password, username }) =>

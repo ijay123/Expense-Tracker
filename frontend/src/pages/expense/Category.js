@@ -104,9 +104,10 @@ const Category = () => {
   console.log(value);
 
   return (
-    <div className="flex gap-[200px]">
-      <div className="border w-[300px] h-[300px] px-[40px] py-[20px] rounded-[10px]">
+    <div className="flex justify-between border-[5px] w-[60%] border-green-900 p-[40px] bg-[#552121]">
+      <div className="border-[5px] w-[300px] h-[300px] px-[40px] py-[20px] rounded-[10px] bg-[#e8e7e7]">
         <p className="text-[30px] mb-[40px] text-green-600">Enter Category</p>
+        
         <p>
           <input
             type="text"
@@ -128,7 +129,8 @@ const Category = () => {
           </button>
         )}
       </div>
-      <div className="border px-[30px] py-[20px] text-[25px]">
+      <div className="rounded-[10px] px-[30px] py-[20px] text-[25px] bg-[#e8e7e7] transition-all">
+        <p className="mb-[40px] text-[green]">All Categories</p>
       {cat
           ? cat.map((catList, id) => (
               <ul key={id} className="list-disc text-[20px]">

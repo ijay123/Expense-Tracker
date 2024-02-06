@@ -4,12 +4,13 @@ import { paginate } from "../../util/pagination.js";
 
 export const createIncomeExpense = async (req, res) => {
   const data = req.body;
+  const userId = req.user.id;
 
   //create the IncomeExpense
 
   const descExist = await IncomeExpense.findOne({
     desc: data.desc,
-    userId: req.user._id,
+    userId: data.userId,
   })
 
   if (descExist) {
@@ -27,12 +28,15 @@ export const createIncomeExpense = async (req, res) => {
     totalExpense: data.totalExpense,
     price: data.price,
     categoryId: data.categoryId,
-    userId: req.user._id,
+    userId: data.userId,
   });
+  const newIncomeExpense = await IncomeExpense.findOne({
+    _id: incomeExpense._id,
+  }).populate("userId");
 
   res.status(httpStatus.CREATED).json({
     status: "success",
-    data: incomeExpense,
+    data: newIncomeExpense,
   });
 };
 
@@ -55,29 +59,17 @@ export const getIncomeExpense = async (req, res) => {
 };
 
 export const getAllIncomeExpenses = async (req, res) => {
-  try {
-    const model = "IncomeExpense";
-    const query = { userId: req.user.id };
-    const page = 1;
-    const pageSize = 10;
-    const populateField = ["userId"];
-    const data = await paginate(model, query, page, pageSize, populateField);
+  const userId = req.query.id;
+  console.log("params", req.params);
+  console.log("query", req.query);
+  const getCategory = await IncomeExpense.find({ userId: req.user.id }).populate(
+    "userId"
+  );
 
-    // const tasks = await taskModel
-    //   .find({ userId: req.user.id })
-    //   .populate("userId");
-
-    res.status(httpStatus.OK).json({
-      status: "success",
-      payload: data,
-    });
-  } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: "error",
-      payload: error.message,
-    });
-  }
-
+  res.status(httpStatus.OK).json({
+    status: "success",
+    data: getCategory,
+  });
   // const result = await IncomeExpense.find({ userId: req.user._id }).populate(
   //   "userId"
   // );
