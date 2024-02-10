@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {GiCrossMark} from 'react-icons/gi'
+import { GiCrossMark } from "react-icons/gi";
 
 import { toast } from "react-toastify";
 import { createUserAction } from "../../redux/action/user.js";
@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = ({ register, login }) => {
   const dispatch = useDispatch();
+
   const {
     createdUser: { error, user, success, loading },
     loggedInUser: {
@@ -23,6 +24,11 @@ const Signup = ({ register, login }) => {
       loading: logInLoading,
     },
   } = useSelector((state) => state);
+
+
+  const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
+  ? JSON.parse(localStorage.getItem("expenseUserInfo"))
+  : null;
 
   //   const { error, success, user } = loginUser;
   const navigate = useNavigate();
@@ -44,10 +50,10 @@ const Signup = ({ register, login }) => {
 
   useEffect(() => {
     if (success) {
-      toast.success(`welcome${user.username}`);
+      toast.success(`welcome${userInfoFromLocalStorage?.data?.username}`);
     }
     if (LogInSuccess) {
-      toast.success(`You have successfully loggedin${loggedInUser.user}`);
+      toast.success(`You have successfully loggedin${userInfoFromLocalStorage?.data?.username}`);
       setTimeout(() => {
         navigate("/expenses");
       }, 3000);
@@ -95,34 +101,18 @@ const Signup = ({ register, login }) => {
       <div className="flex w-screen flex-wrap text-slate-800">
         <div className="relative hidden h-screen select-none flex-col justify-center bg-[grey] text-center md:flex md:w-1/2">
           <div className="mx-auto py-16 text-white xl:w-[40rem]">
-
-            <img src="/img/ximage.jpg" alt="login-img" className="bg-[cover] h-[80vh] w-[100vw]"/>
-            {/* <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600">
-              New Feature
-            </span>
-            <p className="my-6 text-3xl font-semibold leading-10">
-              Create animations with{" "}
-              <span className="mx-auto block w-56 whitespace-nowrap rounded-lg bg-orange-400 py-2 text-white">
-                drag and drop
-              </span>
-            </p>
-            <p className="mb-4">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
-              necessitatibus nostrum repellendus ab totam.
-            </p>
-            <a
-              href="/"
-              className="font-semibold tracking-wide text-white underline underline-offset-4"
-            >
-              Learn More
-            </a> */}
+            <img
+              src="/img/ximage.jpg"
+              alt="login-img"
+              className="bg-[cover] h-[80vh] w-[100vw]"
+            />
           </div>
-          {/* <!-- <img className="mx-auto w-11/12 max-w-lg rounded-lg object-cover" src="/images/SoOmmtD2P6rjV76JvJTc6.png" /> --> */}
         </div>
         <div className="flex mt-[100px] w-full flex-col md:w-1/2">
-        <div className="flex items-center ml-[500px]">
-        <img src="/img/calculator.png" alt="" className="w-[40px]"/> <i>Xtracker</i>
-      </div>
+          <div className="flex items-center ml-[500px]">
+            <img src="/img/calculator.png" alt="" className="w-[40px]" />{" "}
+            <i>Xtracker</i>
+          </div>
           <div className=" mx-auto flex flex-col justify-center px-6 pt-8 md:justify-start lg:w-[28rem]">
             {register && (
               <p className="text-center text-3xl font-bold md:text-left md:leading-tight">

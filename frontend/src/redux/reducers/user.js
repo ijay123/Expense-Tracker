@@ -6,15 +6,16 @@ import {
   CREATE_USER_RESET,
   CREATE_USER_SUCCESS,
   CREATE_USER_REQUEST,
-
   LOGIN_USER_CLEAR_ERROR,
   LOGIN_USER_ERROR,
   LOGIN_USER_REQUEST,
   LOGIN_USER_RESET,
-  LOGIN_USER_SUCCESS
+  LOGIN_USER_SUCCESS,
 } from "../constants/user";
 
-const userInfoFromLocalStorage = localStorage.getItem('expenseUserInfo') ? JSON.parse(localStorage.getItem('expenseUserInfo')) : null;
+const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
+  ? JSON.parse(localStorage.getItem("expenseUserInfo"))
+  : null;
 
 export const registerUserReducer = (
   state = { user: null, loading: false, error: null, success: false },
@@ -61,9 +62,13 @@ export const registerUserReducer = (
   }
 };
 
-
 export const loginUserReducer = (
-  state = { user: userInfoFromLocalStorage, loading: false, error: null, success: false },
+  state = {
+    user: userInfoFromLocalStorage,
+    loading: false,
+    error: null,
+    success: false,
+  },
   action
 ) => {
   switch (action.type) {
