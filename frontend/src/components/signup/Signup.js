@@ -53,11 +53,11 @@ console.log(value.gender, 'gen')
 
   useEffect(() => {
     if (success) {
-      toast.success(`welcome${userInfoFromLocalStorage?.data?.username}`);
+      toast.success(`welcome ${userInfoFromLocalStorage?.data?.username}`);
     }
     if (LogInSuccess) {
       toast.success(
-        `You have successfully loggedin${userInfoFromLocalStorage?.data?.username}`
+        `You have successfully loggedIn ${userInfoFromLocalStorage?.data?.username}`
       );
       setTimeout(() => {
         navigate("/expenses");
@@ -149,11 +149,12 @@ console.log(value.gender, 'gen')
                       />
                     </div>
 
-                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+                    <div className="relative flex overflow-hidden rounded-md border-2 mt-[50px] transition focus-within:border-blue-600">
                       <select
                         name="gender"
                         id="gender"
                         onChange={changeHandler}
+                        className="p-[8px] outline-none"
                       >
                         <option value="">Gender</option>
 
