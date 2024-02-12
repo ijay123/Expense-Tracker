@@ -136,14 +136,7 @@ const IncomeExpense = () => {
               />
             </div>
 
-            <input
-              type="number"
-              name="totalPrice"
-              placeholder="total Price"
-              value={value.totalExpense}
-              onChange={handleChange}
-              className="p-[10px] outline-none mt-[30px]"
-            />
+       
 <br/>
             {loading ? (
               <Spinner />
