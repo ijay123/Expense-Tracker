@@ -2,7 +2,7 @@ import User from "../../model/user/user.js";
 import httpStatus from "http-status";
 import bcrypt from "bcrypt";
 import { jwtToken } from "../../util/generateToken.js";
-import { readText, deleteText } from "../../util/FsUtils.js";
+// import { readText, deleteText } from "../../util/FsUtils.js";
 
 const createUser = async (req, res) => {
   //collect the data from req body
@@ -41,9 +41,9 @@ const createUser = async (req, res) => {
     gender: data.gender,
     avatar:
       data.gender === "Male"
-        ? "/public/maleAvatar.jpg"
+        ? "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.2.1666096504.1702379919&semt=sph"
         : data.gender === "Female"
-        ? "/public/femaleAvatar.svg"
+        ? "https://cdn-icons-png.flaticon.com/128/4140/4140047.png"
         : "defaultAvatar.jpg",
   });
 
@@ -198,40 +198,40 @@ const updateUser = async (req, res) => {
   });
 };
 
-const userProfileUpload = async (req, res) => {
-  const userId = req.user.id;
-  console.log(req.file, "req.file");
+// const userProfileUpload = async (req, res) => {
+//   const userId = req.user.id;
+//   console.log(req.file, "req.file");
 
-  const foundUser = await User.findOne({ _id: userId });
-  if (!foundUser) {
-    res.status(httpStatus.NOT_FOUND).json({
-      status: "error",
-      message: "User not found",
-    });
-    return;
-  }
+//   const foundUser = await User.findOne({ _id: userId });
+//   if (!foundUser) {
+//     res.status(httpStatus.NOT_FOUND).json({
+//       status: "error",
+//       message: "User not found",
+//     });
+//     return;
+//   }
 
-  //remove old file from server
-  try {
-    const filePresent = await readText(`public/${foundUser.avatar}`);
-    if (filePresent) {
-      await deleteText(`public/${foundUser.avatar}`);
-    }
-  } catch (error) {
-    console.log(error, "errorr");
-  }
+//   //remove old file from server
+//   try {
+//     const filePresent = await readText(`public/${foundUser.avatar}`);
+//     if (filePresent) {
+//       await deleteText(`public/${foundUser.avatar}`);
+//     }
+//   } catch (error) {
+//     console.log(error, "errorr");
+//   }
 
-  const userWithImageUpload = await User.findByIdAndUpdate(
-    { _id: userId },
-    { avatar: req.file.filename },
-    { new: true }
-  );
+//   const userWithImageUpload = await User.findByIdAndUpdate(
+//     { _id: userId },
+//     { avatar: req.file.filename },
+//     { new: true }
+//   );
 
-  res.status(httpStatus.OK).json({
-    status: "success",
-    data: userWithImageUpload,
-  });
-};
+//   res.status(httpStatus.OK).json({
+//     status: "success",
+//     data: userWithImageUpload,
+//   });
+// };
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -251,12 +251,4 @@ const deleteUser = async (req, res) => {
   });
 };
 
-export {
-  createUser,
-  loginUser,
-  getUsers,
-  getUser,
-  updateUser,
-  deleteUser,
-  userProfileUpload,
-};
+export { createUser, loginUser, getUsers, getUser, updateUser, deleteUser };

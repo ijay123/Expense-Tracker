@@ -20,7 +20,11 @@ const Navigation = () => {
         <NavLink to={'/listedexpense'}>All Expenses</NavLink>
         <NavLink to={"/"}>Signup</NavLink>
         <NavLink>
-          <img src={userInfoFromLocalStorage?.data?.avatar} alt="Profile" />
+        {userInfoFromLocalStorage?.data?.avatar ? (
+    <img src={userInfoFromLocalStorage?.data?.avatar} alt="User Profile" className="w-8 h-8 rounded-full" />
+  ) : (
+    <LuUserCircle size="30" />
+  )}
         </NavLink>
       </div>
     </div>
