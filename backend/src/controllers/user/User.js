@@ -38,6 +38,13 @@ const createUser = async (req, res) => {
     username: data.username,
     password: hash, //hash the password using bcrycpt
     email: data.email,
+    gender: data.gender,
+    avatar:
+      data.gender === "Male"
+        ? "/public/maleAvatar.jpg"
+        : data.gender === "Female"
+        ? "/public/femaleAvatar.svg"
+        : "defaultAvatar.jpg",
   });
 
   res.status(httpStatus.CREATED).json({
@@ -161,7 +168,7 @@ const getUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, avatar } = req.body;
   const { id } = req.params;
   const foundUser = await User.findOne({ _id: id });
   if (!foundUser) {
@@ -181,7 +188,7 @@ const updateUser = async (req, res) => {
   }
   const updatedUser = await User.findByIdAndUpdate(
     id,
-    { email: email, password: password },
+    { email: email, password: password, avatar: avatar },
     { new: true }
   );
 

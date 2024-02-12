@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 const baseUrl = "https://expense-tracker-backend-2ge0.onrender.com";
 
 export const createUserAction =
-  ({ email, password, username }) =>
+  ({ email, password, username, gender }) =>
   async (dispatch, state) => {
     //1. before the API call
     dispatch({
@@ -35,7 +35,7 @@ export const createUserAction =
       //make API call
       const { data } = await axios.post(
         `${baseUrl}/users`,
-        { email, password, username },
+        { email, password, username, gender },
         config
       );
       //2. after the API call success
@@ -45,6 +45,8 @@ export const createUserAction =
         payload: data.data,
       });
       console.log(data);
+      console.log("Sending user creation request with payload:", { email, password, username, gender });
+
     } catch (error) {
       //3. after the API call failure
       console.log(error);

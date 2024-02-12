@@ -25,10 +25,9 @@ const Signup = ({ register, login }) => {
     },
   } = useSelector((state) => state);
 
-
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
-  ? JSON.parse(localStorage.getItem("expenseUserInfo"))
-  : null;
+    ? JSON.parse(localStorage.getItem("expenseUserInfo"))
+    : null;
 
   //   const { error, success, user } = loginUser;
   const navigate = useNavigate();
@@ -36,24 +35,30 @@ const Signup = ({ register, login }) => {
     username: "",
     password: "",
     email: "",
+    gender: "",
     remember: "",
   });
 
   function changeHandler(e) {
     const { name, value } = e.target;
-
+    console.log(name, value); // This will log which form element is being changed and its value
     setValue((prev) => ({
       ...prev,
       [name]: value,
     }));
   }
+  
+console.log(value.gender, 'gen')
+
 
   useEffect(() => {
     if (success) {
       toast.success(`welcome${userInfoFromLocalStorage?.data?.username}`);
     }
     if (LogInSuccess) {
-      toast.success(`You have successfully loggedin${userInfoFromLocalStorage?.data?.username}`);
+      toast.success(
+        `You have successfully loggedin${userInfoFromLocalStorage?.data?.username}`
+      );
       setTimeout(() => {
         navigate("/expenses");
       }, 3000);
@@ -80,6 +85,7 @@ const Signup = ({ register, login }) => {
     LogInSuccess,
     loggedInUser,
     navigate,
+    userInfoFromLocalStorage?.data?.username,
   ]);
 
   async function LoginHandler() {
@@ -90,11 +96,14 @@ const Signup = ({ register, login }) => {
     dispatch(
       createUserAction({
         username: value.username,
+        gender: value.gender,
         email: value.email,
         password: value.password,
+       
       })
     );
   }
+
 
   return (
     <div>
@@ -128,16 +137,31 @@ const Signup = ({ register, login }) => {
             <div className="flex flex-col items-stretch pt-3 md:pt-8">
               <div className="flex flex-col pt-4">
                 {register && (
-                  <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                    <input
-                      type="text"
-                      id="username"
-                      name="username"
-                      onChange={changeHandler}
-                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                      placeholder="Name"
-                    />
-                  </div>
+                  <>
+                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={changeHandler}
+                        className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                        placeholder="Name"
+                      />
+                    </div>
+
+                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+                      <select
+                        name="gender"
+                        id="gender"
+                        onChange={changeHandler}
+                      >
+                        <option value="">Gender</option>
+
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                    </div>
+                  </>
                 )}
               </div>
               <div className="flex flex-col pt-8">
@@ -198,7 +222,7 @@ const Signup = ({ register, login }) => {
               ) : (
                 <div>
                   {loading ? (
-                    <Spinner />
+                    <Spinner className='w-[20px]' />
                   ) : (
                     <button
                       onClick={RegisterHandler}

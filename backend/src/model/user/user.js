@@ -17,6 +17,11 @@ const userSchema = mongoose.Schema(
     avatar: {
       type: String,
     },
+    gender: {
+      type: String,
+      required: [true, "Gender is required"],
+      enum: ["Male", "Female"],
+    },
     inflows: [
       {
         type: mongoose.Schema.Types.ObjectId,
