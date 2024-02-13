@@ -43,12 +43,7 @@ export const createUserAction =
         payload: data.data,
       });
       console.log(data);
-      console.log("Sending user creation request with payload:", {
-        email,
-        password,
-        username,
-        gender,
-      });
+   
     } catch (error) {
       //3. after the API call failure
       console.log(error);
