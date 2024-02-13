@@ -13,8 +13,6 @@ import {
 } from "../constants/user";
 import { toast } from "react-toastify";
 
-
-
 const baseUrl = "https://expense-tracker-backend-2ge0.onrender.com";
 
 export const createUserAction =
@@ -45,8 +43,12 @@ export const createUserAction =
         payload: data.data,
       });
       console.log(data);
-      console.log("Sending user creation request with payload:", { email, password, username, gender });
-
+      console.log("Sending user creation request with payload:", {
+        email,
+        password,
+        username,
+        gender,
+      });
     } catch (error) {
       //3. after the API call failure
       console.log(error);
@@ -95,6 +97,7 @@ export const loginUserAction =
         "expenseUserInfo",
         JSON.stringify({ data: data.data, token: data.token })
       );
+      return;
     } catch (error) {
       //3. after the API call failure
       console.log(error);
@@ -114,7 +117,7 @@ export const loginUserAction =
 export const logout = () => async (dispatch, state) => {
   console.log("logged out");
   dispatch({ type: LOGIN_USER_RESET });
-  localStorage.setItem("userInfo", null);
+  localStorage.setItem("expenseUserInfo", null);
   toast.success("logged out");
 };
 

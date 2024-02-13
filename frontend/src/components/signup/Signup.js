@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 import { createUserAction } from "../../redux/action/user.js";
 import {
   CREATE_USER_CLEAR_ERROR,
+  CREATE_USER_RESET,
   LOGIN_USER_CLEAR_ERROR,
+  LOGIN_USER_RESET,
 } from "../../redux/constants/user.js";
 import { loginUserAction } from "../../redux/action/user.js";
 import Spinner from "../Spinner/CustomSpinner.jsx";
@@ -24,6 +26,7 @@ const Signup = ({ register, login }) => {
       loading: logInLoading,
     },
   } = useSelector((state) => state);
+  console.log(user, "usersssssss")
 
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
@@ -47,20 +50,24 @@ const Signup = ({ register, login }) => {
       [name]: value,
     }));
   }
-  
-console.log(value.gender, 'gen')
 
+  console.log(value.gender, "gen");
 
   useEffect(() => {
     if (success) {
       toast.success(`welcome ${userInfoFromLocalStorage?.data?.username}`);
+      setTimeout(() => {
+        dispatch({ type: CREATE_USER_RESET });
+      }, 3000);
     }
     if (LogInSuccess) {
       toast.success(
         `You have successfully loggedIn ${userInfoFromLocalStorage?.data?.username}`
+
       );
       setTimeout(() => {
         navigate("/expenses");
+      
       }, 3000);
     }
     if (error) {
@@ -99,11 +106,9 @@ console.log(value.gender, 'gen')
         gender: value.gender,
         email: value.email,
         password: value.password,
-       
       })
     );
   }
-
 
   return (
     <div>
@@ -223,7 +228,7 @@ console.log(value.gender, 'gen')
               ) : (
                 <div>
                   {loading ? (
-                    <Spinner className='w-[20px]' />
+                    <Spinner className="w-[20px]" />
                   ) : (
                     <button
                       onClick={RegisterHandler}
