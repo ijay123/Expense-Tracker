@@ -63,7 +63,6 @@ const Signup = ({ register, login }) => {
     if (LogInSuccess) {
       toast.success(
         `You have successfully loggedIn ${userInfoFromLocalStorage?.data?.username}`
-
       );
       setTimeout(() => {
         navigate("/expenses");

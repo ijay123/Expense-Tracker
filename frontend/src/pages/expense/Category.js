@@ -12,7 +12,7 @@ import {
   createCategoryAction,
   getCategoriesAction,
   updateCategoryAction,
-  deleteCategoryAction
+  deleteCategoryAction,
 } from "../../redux/action/category";
 
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const Category = () => {
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
     : null;
-    console.log(cat, "cat")
+  console.log(cat, "cat");
 
   const [value, setValue] = useState({
     name: "",
@@ -76,7 +76,7 @@ const Category = () => {
     }
 
     dispatch(getCategoriesAction());
-  }, [success, error, dispatch, name, navigate, deleteSuccess,updateSuccess]);
+  }, [success, error, dispatch, name, navigate, deleteSuccess, updateSuccess]);
 
   async function categoryHandler() {
     dispatch(createCategoryAction(value));
@@ -104,10 +104,12 @@ const Category = () => {
   console.log(value);
 
   return (
-    <div className="flex justify-between border-[5px] w-[60%] border-green-900 p-[40px] bg-[#552121]">
-      <div className="border-[5px] w-[300px] h-[300px] px-[40px] py-[20px] rounded-[10px] bg-[#e8e7e7]">
-        <p className="text-[30px] mb-[40px] text-green-600">Enter Category</p>
-        
+    <div className="flex flex-col gap-[50px] border-[5px] w-[90vw] border-green-900 p-[30px] bg-[grey] sm:flex-row items-center sm:items-start sm:justify-between  sm:w-[60%]">
+      <div className="border-[5px] flex flex-col w-[70vw] sm:w-[300px] h-[300px] px-[10px] sm:px-[40px] py-[20px] rounded-[10px] bg-[#e8e7e7]">
+        <p className="text-[20px] sm:text-[30px] mb-[40px] text-green-600">
+          Enter Category
+        </p>
+
         <p>
           <input
             type="text"
@@ -115,7 +117,7 @@ const Category = () => {
             placeholder="Category"
             onChange={handleChange}
             value={value.name}
-            className="mb-[20px] border p-[10px] text-[20px] rounded-[10px] outline-none"
+            className="mb-[20px] border p-[10px] w-[100%] text-[20px] rounded-[10px] outline-none"
           />
         </p>
         {loading ? (
@@ -129,11 +131,11 @@ const Category = () => {
           </button>
         )}
       </div>
-      <div className="rounded-[10px] px-[30px] py-[20px] text-[25px] bg-[#e8e7e7] transition-all">
+      <div className="rounded-[10px] px-[10px] sm:px-[30px] py-[20px] text-[25px] bg-[#e8e7e7] transition-all">
         <p className="mb-[40px] text-[green]">All Categories</p>
-      {cat
+        {cat
           ? cat.map((catList, id) => (
-              <ul key={id} className="list-disc text-[20px]">
+              <ul key={id} className="list-disc text-[20px] px-[9px]">
                 <li className="mb-[30px]">
                   {catList.name}
                   {openEditCategory && categoryId === catList._id && (
@@ -144,7 +146,7 @@ const Category = () => {
                         onChange={(e) => setEditCategory(e.target.value)}
                       />
                       {loadingUpdate ? (
-                        <Spinner/>
+                        <Spinner />
                       ) : (
                         <button onClick={() => updateHandler(catList._id)}>
                           Save
@@ -156,25 +158,26 @@ const Category = () => {
                       </button>
                     </div>
                   )}
-
-                  {!openEditCategory && (
-                    <button
-                      onClick={() => toggleEditHandler(catList._id)}
-                      className=" p-[4px] bg-[green] text-white rounded-[4px] text-[18px] ml-[40px] mr-[10px]"
-                    >
-                      Update
-                    </button>
-                  )}
-                  {loadingDelete && categoryId === catList._id ? (
-                    <Spinner />
-                  ) : (
-                    <button
-                      onClick={() => deleteHandler(catList._id)}
-                      className=" p-[4px] bg-[green] text-white rounded-[4px] text-[18px]"
-                    >
-                      Delete
-                    </button>
-                  )}
+                  <div className="flex">
+                    {!openEditCategory && (
+                      <button
+                        onClick={() => toggleEditHandler(catList._id)}
+                        className=" p-[4px] bg-[green] text-white rounded-[4px] text-[18px] ml-[40px] mr-[10px]"
+                      >
+                        Update
+                      </button>
+                    )}
+                    {loadingDelete && categoryId === catList._id ? (
+                      <Spinner />
+                    ) : (
+                      <button
+                        onClick={() => deleteHandler(catList._id)}
+                        className=" p-[4px] bg-[green] text-white rounded-[4px] text-[18px]"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
                 </li>
               </ul>
             ))
