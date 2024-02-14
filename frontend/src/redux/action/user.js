@@ -43,7 +43,6 @@ export const createUserAction =
         payload: data.data,
       });
       console.log(data);
-   
     } catch (error) {
       //3. after the API call failure
       console.log(error);
@@ -112,7 +111,7 @@ export const loginUserAction =
 export const logout = () => async (dispatch, state) => {
   console.log("logged out");
   dispatch({ type: LOGIN_USER_RESET });
-  localStorage.setItem("expenseUserInfo", null);
+  localStorage.removeItem("expenseUserInfo");
   toast.success("logged out");
 };
 

@@ -26,7 +26,7 @@ const Signup = ({ register, login }) => {
       loading: logInLoading,
     },
   } = useSelector((state) => state);
-  console.log(user, "usersssssss")
+  console.log(user, "usersssssss");
 
   const userInfoFromLocalStorage = localStorage.getItem("expenseUserInfo")
     ? JSON.parse(localStorage.getItem("expenseUserInfo"))
@@ -66,20 +66,19 @@ const Signup = ({ register, login }) => {
       );
       setTimeout(() => {
         navigate("/expenses");
-      
       }, 3000);
     }
     if (error) {
       toast.error(`${error}`);
       setTimeout(() => {
-        dispatch(CREATE_USER_CLEAR_ERROR);
+        dispatch({ type: CREATE_USER_CLEAR_ERROR });
       }, 3000);
     }
 
     if (loggedInError) {
       toast.error(`${loggedInError}`);
       setTimeout(() => {
-        dispatch(LOGIN_USER_CLEAR_ERROR);
+        dispatch({ type: LOGIN_USER_CLEAR_ERROR });
       }, 3000);
     }
   }, [

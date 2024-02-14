@@ -17,7 +17,7 @@ const ListedExpenses = () => {
   
   } = useSelector((state) => state);
 
-  // const { records } = expenses;
+
 
   console.log(expenses, "expenses");
 
@@ -27,17 +27,17 @@ const ListedExpenses = () => {
   }, [dispatch]);
 
   return (
-    <div className="pt-[200px]">
-      <p className="flex justify-center text-[40px] mb-[40px] text-[green]">All Expenses</p>
-      <div className="text-[25px] text-[green] border w-[80%] m-auto">
+    <div className="pt-[150px] sm:pt-[200px]">
+      <p className="flex justify-center text-[30px] sm:text-[40px] mb-[40px] text-[green]">All Expenses</p>
+      <div className="sm:text-[25px] text-[green] border  sm:w-[80%] m-auto">
         {loading ? (
           <Spinner />
         ) : (
-          <div className="p-[20px]">
+          <div className="p-[20px] gap-[30px] sm:overflow-hidden sm:flex-col flex overflow-x-auto">
             {expenses &&
                expenses.map((expense) => (
-                  <div key={expense._id} className="flex p-[40px] gap-[20px] bg-[#b8b5b5]">
-                     <p><span className="text-[#6c2b2b]">Category:</span> {expense.categoriId}</p>
+                  <div key={expense._id} className="flex flex-wrap p-[20px] sm:p-[40px] gap-[10px] sm:gap-[20px] bg-[#b8b5b5]">
+                     <p><span className="text-[#6c2b2b]">Category:</span> {expense.categoryId}</p>
                     <p><span className="text-[#6c2b2b]">Income:</span> {expense.amount}</p>
                     <p><span className="text-[#6c2b2b]">Description:</span>{expense.desc}</p>
                     <p><span className="text-[#6c2b2b]">Price:</span> {expense.price}</p>

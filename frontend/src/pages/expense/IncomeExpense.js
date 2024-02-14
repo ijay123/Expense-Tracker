@@ -80,19 +80,19 @@ const IncomeExpense = () => {
     // navigate('/listedexpense')
   }
   return (
-    <div className="pt-[150px] bg-green-700 h-[100vh]">
+    <div className="pt-[150px] bg-green-700 sm:h-[100vh]">
       <form>
         <h2 className="text-center text-4xl font-bold mb-[100px] text-white">
           Add Expense
         </h2>
-        <div className="flex gap-[200px]">
-          <div className="flex-col ml-[200px]">
+        <div className="flex sm:flex-row flex-col sm:gap-[200px]">
+          <div className="flex justify-center gap-[10px] sm:flex-col sm:ml-[200px]">
             <div>
               <input
                 placeholder="Add income"
                 name="amount"
                 onChange={handleChange}
-                className="bg-white w-[300px] h-[50px] mb-[80px] pl-[20px] outline-none rounded-[10px] text-[30px]"
+                className="bg-white sm:w-[300px] w-[40vw] h-[50px] mb-[80px] pl-[20px] outline-none rounded-[10px] sm:text-[30px]"
               />
             </div>
 
@@ -101,7 +101,7 @@ const IncomeExpense = () => {
                 onChange={handleChange}
                 value={value.categoryId}
                 name="categoryId"
-                className="w-[200px] h-[50px] rounded-[10px] outline-none"
+                className="sm:w-[200px] w-[50vw] h-[50px] rounded-[10px] outline-none"
               >
                 <option>Select Category</option>
                 {cat &&
@@ -117,7 +117,7 @@ const IncomeExpense = () => {
           <div>
             {/* last */}
 
-            <div className="flex gap-[30px] items-center border-[5px] border-[#6d2a2a] bg-[#566156] p-[40px]">
+            <div className="flex sm:gap-[30px] gap-[10px] items-center border-[5px] border-[#6d2a2a] bg-[#566156] p-[20px] sm:p-[40px]">
               <textarea
                 rows={5}
                 cols={20}
@@ -132,7 +132,7 @@ const IncomeExpense = () => {
                 placeholder="Add Price"
                 onChange={handleChange}
                 name="price"
-                className="p-[10px] outline-none"
+                className="w-[40vw] sm:w-[200px]  p-[10px] outline-none"
               />
             </div>
 
@@ -143,9 +143,9 @@ const IncomeExpense = () => {
             ) : (
               <button
                 onClick={expenseHandler}
-                className="w-[200px] h-[40px] bg-[grey] rounded-[5px] text-white mt-[100px] ml-[100px] outline-none"
+                className="w-[200px] h-[40px] flex justify-center items-center m-auto  bg-[grey] rounded-[5px] text-white sm:mt-[100px] sm:ml-[100px] mb-[50px] outline-none"
               >
-                Add to Income
+                Add Expense
               </button>
             )}
           </div>
