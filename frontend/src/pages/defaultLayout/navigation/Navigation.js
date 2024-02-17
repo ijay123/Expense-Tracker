@@ -17,7 +17,7 @@ const Navigation = () => {
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch the logout action
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -52,7 +52,7 @@ const Navigation = () => {
           <NavLink to={"/expenses"}>Expenses</NavLink>
           <NavLink to={"/incomeexpense"}>Income Expenses</NavLink>
           <NavLink to={"/listedexpense"}>All Expenses</NavLink>
-          <NavLink to={"/"}>Signup</NavLink>
+          <NavLink onClick={handleLogout}>Log out</NavLink>
           <NavLink>
             {userInfoFromLocalStorage?.data?.avatar ? (
               <div className="flex gap-[10px]">
