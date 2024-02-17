@@ -56,6 +56,7 @@ const Category = () => {
     }
 
     if (updateSuccess) {
+      toast.success("Category updated successfully");
       //reset
       dispatch({ type: UPDATE_CATEGORY_RESET });
       dispatch(getCategoriesAction());
@@ -64,6 +65,7 @@ const Category = () => {
       setEditCategory("");
     }
     if (deleteSuccess) {
+      toast.success("Delete Successful!");
       dispatch({ type: DELETE_CATEGORY_RESET });
       dispatch(getCategoriesAction());
     }
@@ -148,12 +150,18 @@ const Category = () => {
                       {loadingUpdate ? (
                         <Spinner />
                       ) : (
-                        <button onClick={() => updateHandler(catList._id)}>
+                        <button
+                          className="bg-[green] rounded-[5px] p-[2px] text-white"
+                          onClick={() => updateHandler(catList._id)}
+                        >
                           Save
                         </button>
                       )}
 
-                      <button onClick={() => canceUpdateHandler()}>
+                      <button
+                        className="bg-[red] ml-[10px] rounded-[5px] p-[2px] text-white"
+                        onClick={() => canceUpdateHandler()}
+                      >
                         cancel
                       </button>
                     </div>
